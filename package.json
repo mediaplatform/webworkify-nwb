@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ambroos/webworkify-webpack.git"
+    "url": "git+https://github.com/mediaplatform/webworkify-nwb.git"
   },
   "keywords": [
     "web",
