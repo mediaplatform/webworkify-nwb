@@ -27,11 +27,11 @@
   },
   "homepage": "https://github.com/mediaplatform/webworkify-nwb",
   "devDependencies": {
-    "babel-core": "^6.9.0",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
     "gamma": "^1.0.0",
-    "http-server": "^0.8.5",
-    "nwb": "^0.12.2"
+    "http-server": "^0.9.0",
+    "nwb": "^0.15.4"
   }
 }
