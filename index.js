@@ -70,15 +70,27 @@ module.exports = function (fn, options) {
         }
 
         var webpackRequireName = wrapperSignature[1];
-        if ((wrapperFuncString.indexOf(webpackRequireName + '(' + webworkifyWebpackModuleId + ')') > -1) || wrapperFuncString.indexOf(webpackRequireName + '("' + webworkifyWebpackModuleId + '")') > -1) {
+        if ((wrapperFuncString.indexOf(webpackRequireName + '(' + webworkifyWebpackModuleId + ')') > -1) ||
+             wrapperFuncString.indexOf(webpackRequireName + '("' + webworkifyWebpackModuleId + '")') > -1) {
             // find all calls that look like __webpack_require__(\d+), and aren't webworkify-webpack
             var re = new RegExp(quoteRegExp(webpackRequireName) + '\\(\\"\(\\S*)\\"\\)', 'g');
-
+            var production = process.env.NODE_ENV === 'production';
             var match;
-            while (match = re.exec(wrapperFuncString)) {
+
+            if (production) {
+              match = re.exec(wrapperFuncString);
+              var modulesStr = '"' + match[1];
+              var myregex = new RegExp(/"((?:\\.|[^"\\])*)"/, 'g');
+              var matchRegx;
+              while (matchRegx = myregex.exec(modulesStr)) {
+                potentialFnModuleIds.push(matchRegx[1]);
+              }
+            } else {
+              while (match = re.exec(wrapperFuncString)) {
                 if (match[1] != ('' + webworkifyWebpackModuleId)) {
-                    potentialFnModuleIds.push(match[1]);
+                  potentialFnModuleIds.push(match[1]);
                 }
+              }
             }
         }
     }
